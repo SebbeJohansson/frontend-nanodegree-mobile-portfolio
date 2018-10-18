@@ -1,0 +1,17 @@
+# Performance / Compression ----------------------------------------------------
+<IfModule mod_headers.c>
+	Header set Connection Keep-Alive
+
+	# Default - One Month
+    Header set Cache-Control "max-age=2628000, public"
+
+    # Static Content - One year
+    <filesMatch "\.(ico|pdf|flv|jpg|jpeg|png|gif)$">
+        Header set Cache-Control "max-age=1209600, public"
+    </filesMatch>
+
+    # Css/js etc - Fifteen days - revalidate very time
+    <filesMatch "\.(css|js|swf)$">
+        Header set Cache-Control "max-age=1314000, public, must-revalidate"
+    </filesMatch>
+</IfModule>
